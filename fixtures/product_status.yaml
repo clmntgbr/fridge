@@ -1,0 +1,10 @@
+App\Entity\ProductStatus:
+  product_status_waiting_validation:
+    id: 1
+    reference: '<(App\Lists\ProductStatusReference::WAITING_VALIDATION)>'
+    label: 'Waiting for validation'
+
+  product_status_validated:
+    id: 2
+    reference: '<(App\Lists\ProductStatusReference::VALIDATED)>'
+    label: 'Validated'

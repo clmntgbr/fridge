@@ -53,6 +53,12 @@ RUN docker-php-source extract \
 
 RUN ls -al /usr/local/lib/php/extensions/
 
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /tmp
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN find /tmp -type d -exec chmod -v 1777 {} +
+
 COPY bin bin
 COPY templates templates
 COPY translations translations

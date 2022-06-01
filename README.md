@@ -1,6 +1,10 @@
-# Symfony Docker Template
+# Fridge Alert project
 
-A Symfony 6 docker template base project using PHP8, Nginx, MariaDb, RabbitMQ, MailDev.
+backend part for a Fridget Alert project using PHP8, Nginx, MariaDb, RabbitMQ, MailDev.
+
+You will scan the label of a product, it will find it via OpenFoodFact and add it to your virtual fridge, and you can set up some alerts for the consumption date limit (it will detect it via an OCR).
+
+You will receive mail & alerts when the date came close to your setups alerts and you will never forget your product in fridge !
 
 ## Getting Started
 
@@ -19,7 +23,7 @@ Open `https://maildev.docker.localhost` in your favorite web browser for maildev
 
 Open `https://rabbitmq.docker.localhost` in your favorite web browser for rabbitmq
 
-Open `https://{docker}.docker.localhost` in your favorite web browser for symfony app
+Open `https://fridge.docker.localhost` in your favorite web browser for symfony app
 
 ## Features
 

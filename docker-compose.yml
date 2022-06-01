@@ -51,10 +51,10 @@ services:
     ports:
       - 33182:3306
     volumes:
-      - database_volume:/var/lib/mysql
+      - database_volume_fridge:/var/lib/mysql
 
 volumes:
-  database_volume: {}
+  database_volume_fridge: {}
   certs: {}
 
 networks:

@@ -20,5 +20,17 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Api\Controller\:
+        resource: '../src/Api/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
+    App\Subscriber\ProductSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+    App\Subscriber\UserSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+    App\Decorator\JwtDecorator:
+        decorates: 'api_platform.openapi.factory'

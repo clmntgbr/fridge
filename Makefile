@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-DOCKER_COMPOSE = docker-compose -p docker
+DOCKER_COMPOSE = docker-compose -p fridge
 
-CONTAINER_NGINX = $$(docker container ls -f "name=docker_nginx" -q)
-CONTAINER_PHP = $$(docker container ls -f "name=docker_php" -q)
-CONTAINER_DB = $$(docker container ls -f "name=docker_database" -q)
+CONTAINER_NGINX = $$(docker container ls -f "name=fridge_nginx" -q)
+CONTAINER_PHP = $$(docker container ls -f "name=fridge_php" -q)
+CONTAINER_DB = $$(docker container ls -f "name=fridge_database" -q)
 
 NGINX = docker exec -ti $(CONTAINER_NGINX)
 PHP = docker exec -ti $(CONTAINER_PHP)
@@ -76,7 +76,7 @@ create:
 
 ## Load fixtures
 fixture:
-	$(PHP) bin/console doctrine:fixtures:load --no-interaction
+	$(PHP) bin/console hautelook:fixtures:load --no-interaction
 
 ## Making migration file
 migration:
@@ -86,9 +86,8 @@ migration:
 migrate:
 	$(PHP) bin/console doctrine:migration:migrate --no-interaction
 
-## Applying migration
-migrate:
-	$(PHP) bin/console doctrine:migration:migrate --no-interaction
-
 ## Init project
 init: install update drop create migrate fixture
+
+jwt:
+	@$(DOCKER_COMPOSE) exec php sh -c 'set -e && apk add openssl && bin/console lexik:jwt:generate-keypair --overwrite'

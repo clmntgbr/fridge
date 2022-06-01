@@ -9,7 +9,13 @@
 /public/bundles/
 /var/
 /vendor/
+/config/jwt/*.pem
 /.env
 .env
-/config/jwt/*.pem
+symfony.lock
+/public/gas_price/
 ###< symfony/framework-bundle ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
