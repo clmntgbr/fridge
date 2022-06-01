@@ -5,10 +5,13 @@ namespace App\Service;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PostProductByEanService
 {
+    private Product $product;
+
     public function __construct(
         private ValidatorInterface     $validator,
         private ProductRepository      $productRepository,
@@ -18,23 +21,38 @@ class PostProductByEanService
     {
     }
 
-    public function validate($entity): void
+    public function hydrate(Request $request): self
     {
-        $errors = $this->validator->validate($entity);
+        $this->product = new Product();
+        $this->product
+            ->setFile($request->files->get('file') ?? null)
+            ->setEan($request->request->get('ean'))
+        ;
 
-        if (count($errors) > 0) {
-            throw new \Exception(sprintf('%s errors : %s', get_class($entity), $errors));
-        }
+        return $this;
     }
 
-    public function find(string $ean): Product
+    public function validate(): self
     {
-        $product = $this->productRepository->findOneBy(['ean' => $ean]);
+        $errors = $this->validator->validate($this->product);
+
+        if (count($errors) > 0) {
+            throw new \Exception(sprintf('%s errors : %s', get_class($this->product), $errors));
+        }
+
+        return $this;
+    }
+
+    public function find(): Product
+    {
+        $product = $this->productRepository->findOneBy(['ean' => $this->product->getEan()]);
 
         if (null === $product) {
-            $data = $this->openFoodFactApiService->find($ean);
+            $data = $this->openFoodFactApiService->find($this->product->getEan());
             $product = $this->create($data);
         }
+
+        $product->setFile($this->product->getFile());
 
         return $product;
     }

@@ -4,6 +4,7 @@ namespace App\Api\Controller;
 
 use App\Entity\Product;
 use App\Service\PostProductByEanService;
+use Symfony\Component\HttpFoundation\Request;
 
 class PostProductByEan
 {
@@ -15,9 +16,12 @@ class PostProductByEan
     {
     }
 
-    public function __invoke(Product $data): Product
+    public function __invoke(Request $request): Product
     {
-        $this->postProductByEanService->validate($data);
-        return $this->postProductByEanService->find($data->getEan());
+        return $this->postProductByEanService
+            ->hydrate($request)
+            ->validate()
+            ->find()
+        ;
     }
 }

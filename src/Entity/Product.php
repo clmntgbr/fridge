@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -21,6 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'path' => '/products/ean',
             'controller' => PostProductByEan::class,
             'pagination_enabled' => false,
+            'deserialize' => false,
             'denormalization_context' => ['groups' => 'product.post'],
         ]
     ],
@@ -30,6 +32,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Product
 {
     use TimestampableEntity;
+
+    #[Groups(['product.post'])]
+    private ?UploadedFile $file;
 
     #[ORM\Id, ORM\GeneratedValue, ORM\Column(type: Types::INTEGER)]
     private ?int $id;
@@ -178,6 +183,24 @@ class Product
                 $productStatusHistory->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return UploadedFile|null
+     */
+    public function getFile(): ?UploadedFile
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param UploadedFile|null $file
+     */
+    public function setFile(?UploadedFile $file): self
+    {
+        $this->file = $file;
 
         return $this;
     }
