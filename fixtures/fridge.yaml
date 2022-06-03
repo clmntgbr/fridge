@@ -1,0 +1,3 @@
+App\Entity\Fridge:
+  fridge_1:
+    user: '@user_1'
