@@ -9,3 +9,7 @@ kernel:
 authentication_token:
     path: /api/authenticate
     methods: [ 'POST' ]
+
+admin:
+    resource: ../src/Admin/
+    type: annotation
