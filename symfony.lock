@@ -547,6 +547,9 @@
     "symfony/yaml": {
         "version": "v6.0.3"
     },
+    "thecodingmachine/safe": {
+        "version": "v2.2.1"
+    },
     "theofidry/alice-data-fixtures": {
         "version": "1.5",
         "recipe": {

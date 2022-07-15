@@ -39,7 +39,9 @@
         "symfony/twig-bundle": "6.0.*",
         "symfony/validator": "6.0.*",
         "symfony/yaml": "6.0.*",
-        "vich/uploader-bundle": "^1.19"
+        "thecodingmachine/safe": "^2.2",
+        "vich/uploader-bundle": "^1.19",
+        "ext-exif": "*"
     },
     "config": {
         "allow-plugins": {

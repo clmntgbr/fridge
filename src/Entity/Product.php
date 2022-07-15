@@ -81,6 +81,24 @@ class Product
         $this->productStatusHistories = new ArrayCollection();
     }
 
+    #[Groups(['product.read'])]
+    public function getImageName()
+    {
+        return $this->image->getName();
+    }
+
+    #[Groups(['product.read'])]
+    public function getImageIngredientsName()
+    {
+        return $this->imageIngredients->getName();
+    }
+
+    #[Groups(['product.read'])]
+    public function getImageNutritionName()
+    {
+        return $this->imageNutrition->getName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
