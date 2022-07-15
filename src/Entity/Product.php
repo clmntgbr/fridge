@@ -11,8 +11,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Entity\File as EmbeddedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
@@ -29,6 +32,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     itemOperations: ['get'],
     normalizationContext: ['groups' => ['product.read']]
 )]
+#[Vich\Uploadable]
 class Product
 {
     use TimestampableEntity;
@@ -48,14 +52,23 @@ class Product
     #[ORM\Column(type: Types::STRING), Groups(['product.read'])]
     private string $brand;
 
-    #[ORM\Column(type: Types::STRING), Groups(['product.read'])]
-    private string $imageUrl;
+    #[Vich\UploadableField(mapping: 'product_image', fileNameProperty:'image.name', size:'image.size', mimeType:'image.mimeType', originalName:'image.originalName', dimensions:'image.dimensions')]
+    private ?File $imageFile = null;
 
-    #[ORM\Column(type: Types::STRING), Groups(['product.read'])]
-    private string $imageIngredientsUrl;
+    #[ORM\Embedded(class:'Vich\UploaderBundle\Entity\File')]
+    private EmbeddedFile $image;
 
-    #[ORM\Column(type: Types::STRING), Groups(['product.read'])]
-    private string $imageNutritionUrl;
+    #[Vich\UploadableField(mapping: 'product_image', fileNameProperty:'imageIngredients.name', size:'imageIngredients.size', mimeType:'imageIngredients.mimeType', originalName:'imageIngredients.originalName', dimensions:'imageIngredients.dimensions')]
+    private ?File $imageIngredientsFile = null;
+
+    #[ORM\Embedded(class:'Vich\UploaderBundle\Entity\File')]
+    private EmbeddedFile $imageIngredients;
+
+    #[Vich\UploadableField(mapping: 'product_image', fileNameProperty:'imageNutrition.name', size:'imageNutrition.size', mimeType:'imageNutrition.mimeType', originalName:'imageNutrition.originalName', dimensions:'imageNutrition.dimensions')]
+    private ?File $imageNutritionFile = null;
+
+    #[ORM\Embedded(class:'Vich\UploaderBundle\Entity\File')]
+    private EmbeddedFile $imageNutrition;
 
     #[ORM\ManyToOne(targetEntity: ProductStatus::class, cascade: ['persist']), ORM\JoinColumn(nullable: true), Groups(['product.read'])]
     private ProductStatus $productStatus;
@@ -203,5 +216,79 @@ class Product
         $this->file = $file;
 
         return $this;
+    }
+
+    public function setImageFile(?File $imageFile = null)
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage(EmbeddedFile $image): void
+    {
+        $this->image = $image;
+    }
+
+    public function getImage(): ?EmbeddedFile
+    {
+        return $this->image;
+    }
+
+    public function setImageIngredientsFile(?File $imageFile = null)
+    {
+        $this->imageIngredientsFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageIngredientsFile(): ?File
+    {
+        return $this->imageIngredientsFile;
+    }
+
+    public function setImageIngredients(EmbeddedFile $image): void
+    {
+        $this->imageIngredients = $image;
+    }
+
+    public function getImageIngredients(): ?EmbeddedFile
+    {
+        return $this->imageIngredients;
+    }
+
+    public function setImageNutritionFile(?File $imageFile = null)
+    {
+        $this->imageNutritionFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageNutritionFile(): ?File
+    {
+        return $this->imageNutritionFile;
+    }
+
+    public function setImageNutrition(EmbeddedFile $image): void
+    {
+        $this->imageNutrition = $image;
+    }
+
+    public function getImageNutrition(): ?EmbeddedFile
+    {
+        return $this->imageNutrition;
     }
 }
