@@ -40,7 +40,7 @@ class Product
     #[Groups(['product.post'])]
     private ?UploadedFile $file;
 
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column(type: Types::INTEGER)]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column(type: Types::INTEGER), Groups(['product.read'])]
     private ?int $id;
 
     #[ORM\Column(type: Types::STRING, unique: true), Groups(['product.post', 'product.read']), ApiProperty(identifier: true)]
@@ -51,6 +51,9 @@ class Product
 
     #[ORM\Column(type: Types::STRING), Groups(['product.read'])]
     private string $brand;
+
+    #[ORM\Column(type: Types::ARRAY)]
+    private array $data = [];
 
     #[Vich\UploadableField(mapping: 'product_image', fileNameProperty:'image.name', size:'image.size', mimeType:'image.mimeType', originalName:'image.originalName', dimensions:'image.dimensions')]
     private ?File $imageFile = null;
@@ -155,6 +158,24 @@ class Product
     public function getImageIngredientsUrl(): ?string
     {
         return $this->imageIngredientsUrl;
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param array<mixed> $element
+     */
+    public function setData(array $element): self
+    {
+        $this->data = $element;
+
+        return $this;
     }
 
     public function setImageIngredientsUrl(string $imageIngredientsUrl): self

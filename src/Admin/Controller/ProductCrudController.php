@@ -36,6 +36,7 @@ class ProductCrudController extends AbstractCrudController
                 ->setRequired(true)
                 ->setBasePath('/images/products/')
                 ->hideOnForm(),
+            TextField::new('image.name', 'Name')->setDisabled()->hideOnIndex(),
             TextField::new('image.originalName', 'originalName')->setDisabled()->hideOnIndex(),
             NumberField::new('image.size', 'Size')->setDisabled()->hideOnIndex(),
             TextField::new('image.mimeType', 'mimeType')->setDisabled()->hideOnIndex(),
@@ -49,6 +50,7 @@ class ProductCrudController extends AbstractCrudController
                 ->setRequired(true)
                 ->setBasePath('/images/products/')
                 ->hideOnForm(),
+            TextField::new('imageIngredients.name', 'Name')->setDisabled()->hideOnIndex(),
             TextField::new('imageIngredients.originalName', 'originalName')->setDisabled()->hideOnIndex(),
             NumberField::new('imageIngredients.size', 'Size')->setDisabled()->hideOnIndex(),
             TextField::new('imageIngredients.mimeType', 'mimeType')->setDisabled()->hideOnIndex(),
@@ -62,6 +64,7 @@ class ProductCrudController extends AbstractCrudController
                 ->setRequired(true)
                 ->setBasePath('/images/products/')
                 ->hideOnForm(),
+            TextField::new('imageNutrition.name', 'Name')->setDisabled()->hideOnIndex(),
             TextField::new('imageNutrition.originalName', 'originalName')->setDisabled()->hideOnIndex(),
             NumberField::new('imageNutrition.size', 'Size')->setDisabled()->hideOnIndex(),
             TextField::new('imageNutrition.mimeType', 'mimeType')->setDisabled()->hideOnIndex(),

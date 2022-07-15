@@ -65,6 +65,7 @@ class PostProductByEanService
             ->setEan($data['code'])
             ->setName($data['product']['product_name_fr'] ?? $data['product']['product_name'])
             ->setBrand($data['product']['brands'])
+            ->setData($data)
         ;
 
         $file = $this->getImage->get($data['product']['image_url'] ?? null);
