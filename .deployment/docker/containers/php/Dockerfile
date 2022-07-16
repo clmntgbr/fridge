@@ -25,6 +25,10 @@ RUN apk add --no-cache zip libzip-dev
 RUN docker-php-ext-configure zip
 RUN docker-php-ext-install zip
 
+RUN docker-php-ext-configure exif
+RUN docker-php-ext-install exif
+RUN docker-php-ext-enable exif
+
 RUN set -xe \
     && apk add --update \
         icu \

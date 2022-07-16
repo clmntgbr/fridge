@@ -16,7 +16,8 @@ class PostProductByEanService
         private ValidatorInterface     $validator,
         private ProductRepository      $productRepository,
         private OpenFoodFactApiService $openFoodFactApiService,
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private GetImage $getImage
     )
     {
     }
@@ -64,9 +65,23 @@ class PostProductByEanService
             ->setEan($data['code'])
             ->setName($data['product']['product_name_fr'] ?? $data['product']['product_name'])
             ->setBrand($data['product']['brands'])
-            ->setImageUrl($data['product']['image_url'])
-            ->setImageIngredientsUrl($data['product']['image_ingredients_url'])
-            ->setImageNutritionUrl($data['product']['image_nutrition_url']);
+            ->setData($data)
+        ;
+
+        $file = $this->getImage->get($data['product']['image_url'] ?? null);
+        if (null !== $file) {
+            $product->setImage($file);
+        }
+
+        $file = $this->getImage->get($data['product']['image_ingredients_url'] ?? null);
+        if (null !== $file) {
+            $product->setImageIngredients($file);
+        }
+
+        $file = $this->getImage->get($data['product']['image_nutrition_url'] ?? null);
+        if (null !== $file) {
+            $product->setImageNutrition($file);
+        }
 
         $this->em->persist($product);
         $this->em->flush();
