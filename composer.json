@@ -6,6 +6,7 @@
     "require": {
         "php": ">=8.0.2",
         "ext-ctype": "*",
+        "ext-exif": "*",
         "ext-iconv": "*",
         "api-platform/core": "^2.6",
         "doctrine/annotations": "^1.0",
@@ -14,6 +15,7 @@
         "doctrine/orm": "^2.11",
         "easycorp/easyadmin-bundle": "^4.3",
         "hautelook/alice-bundle": "^2.10",
+        "league/flysystem-bundle": "^2.2",
         "lexik/jwt-authentication-bundle": "^2.15",
         "nelmio/cors-bundle": "^2.2",
         "phpdocumentor/reflection-docblock": "^5.3",
@@ -40,8 +42,7 @@
         "symfony/validator": "6.0.*",
         "symfony/yaml": "6.0.*",
         "thecodingmachine/safe": "^2.2",
-        "vich/uploader-bundle": "^1.19",
-        "ext-exif": "*"
+        "vich/uploader-bundle": "^1.19"
     },
     "config": {
         "allow-plugins": {
