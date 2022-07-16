@@ -76,7 +76,7 @@ class Product
     #[ORM\ManyToOne(targetEntity: ProductStatus::class, cascade: ['persist']), ORM\JoinColumn(nullable: true), Groups(['product.read'])]
     private ProductStatus $productStatus;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductStatusHistory::class), Groups(['product.read'])]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductStatusHistory::class, cascade: ['remove']), Groups(['product.read'])]
     private Collection $productStatusHistories;
 
     public function __construct()
