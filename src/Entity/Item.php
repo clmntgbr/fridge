@@ -33,12 +33,17 @@ class Item
     #[ORM\ManyToOne(targetEntity: Product::class, fetch: 'EAGER'), Groups(['item.read', 'item.post']), NotBlank, NotNull]
     private Product $product;
 
-    #[ORM\ManyToOne(targetEntity: ConsumptionDate::class, fetch: 'EXTRA_LAZY'), Groups(['item.read'])]
-    private ConsumptionDate $ConsumptionDate;
+    #[ORM\ManyToOne(targetEntity: ConsumptionDate::class, fetch: 'EXTRA_LAZY', cascade: ['remove']), Groups(['item.read'])]
+    private ConsumptionDate $consumptionDate;
 
     public function __construct()
     {
         $this->id = Uuid::v4();
+    }
+
+    public function __toString(): string
+    {
+        return sprintf('%s - %s - %s', $this->product->getEan(), $this->product->getName(), $this->consumptionDate->getDate()->format('d/m/Y'));
     }
 
     public function getId(): ?string
@@ -79,12 +84,12 @@ class Item
 
     public function getConsumptionDate(): ?ConsumptionDate
     {
-        return $this->ConsumptionDate;
+        return $this->consumptionDate;
     }
 
     public function setConsumptionDate(?ConsumptionDate $ConsumptionDate): self
     {
-        $this->ConsumptionDate = $ConsumptionDate;
+        $this->consumptionDate = $ConsumptionDate;
 
         return $this;
     }

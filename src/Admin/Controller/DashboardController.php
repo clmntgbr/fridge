@@ -2,7 +2,10 @@
 
 namespace App\Admin\Controller;
 
+use App\Entity\Fridge;
 use App\Entity\Product;
+use App\Entity\ProductStatus;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
@@ -36,5 +39,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToUrl('Api Docs', 'fas fa-map-marker-alt', '/api/docs');
         yield MenuItem::linkToCrud('Product', 'fas fa-list', Product::class);
+        yield MenuItem::linkToCrud('Fridge', 'fas fa-list', Fridge::class);
+        yield MenuItem::linkToCrud('ProductStatus', 'fas fa-list', ProductStatus::class);
+        yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
     }
 }

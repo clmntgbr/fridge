@@ -41,6 +41,8 @@ build:
 ## Start containers
 start:
 	@$(DOCKER_COMPOSE) up -d
+	@echo "site is available here: https://fridge.docker.localhost/"
+	@echo "admin is available here: https://fridge.docker.localhost/admin"
 
 ## Stop containers
 stop:
