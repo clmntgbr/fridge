@@ -23,6 +23,11 @@ class ProductStatus
     #[ORM\Column(type: Types::STRING, length: 50)]
     private string $label;
 
+    public function __toString(): string
+    {
+        return $this->label;
+    }
+
     public function setId(?int $id): void
     {
         $this->id = $id;

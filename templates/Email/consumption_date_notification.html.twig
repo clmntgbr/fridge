@@ -1,0 +1,7 @@
+<h1>fridge id : {{ fridge_id }}</h1>
+
+{% for datum in data %}
+    <p>Product name : {{ datum.item.product.name }}</p>
+    <p>Date : {{ datum.date|date('d/m/Y') }}</p>
+    <p>===========================================</p>
+{% endfor %}

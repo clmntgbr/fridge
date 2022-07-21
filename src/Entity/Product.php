@@ -82,6 +82,14 @@ class Product
     public function __construct()
     {
         $this->productStatusHistories = new ArrayCollection();
+        $this->image = new \Vich\UploaderBundle\Entity\File();
+        $this->imageIngredients = new \Vich\UploaderBundle\Entity\File();
+        $this->imageNutrition = new \Vich\UploaderBundle\Entity\File();
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
     #[Groups(['product.read'])]

@@ -33,7 +33,7 @@ class Item
     #[ORM\ManyToOne(targetEntity: Product::class, fetch: 'EAGER'), Groups(['item.read', 'item.post']), NotBlank, NotNull]
     private Product $product;
 
-    #[ORM\ManyToOne(targetEntity: ConsumptionDate::class, fetch: 'EXTRA_LAZY', cascade: ['remove']), Groups(['item.read'])]
+    #[ORM\OneToOne(mappedBy: 'item', targetEntity: ConsumptionDate::class, cascade: ['remove'], fetch: 'EXTRA_LAZY'), Groups(['item.read'])]
     private ConsumptionDate $consumptionDate;
 
     public function __construct()

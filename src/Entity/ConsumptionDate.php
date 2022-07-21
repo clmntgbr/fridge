@@ -25,11 +25,16 @@ class ConsumptionDate
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE), Groups(['consumption_date.post']), NotNull, NotBlank, IsDatePassed]
+    #[ORM\Column(type: Types::DATE_MUTABLE), Groups(['consumption_date.post']), NotNull, NotBlank, IsDatePassed]
     private \DateTimeInterface $date;
 
-    #[Groups(['consumption_date.post']), NotNull, NotBlank]
+    #[ORM\OneToOne(inversedBy: 'consumptionDate', targetEntity: Item::class, cascade: ['remove'], fetch: 'EXTRA_LAZY'), Groups(['item.read'])]
     private Item $item;
+
+    public function __toString(): string
+    {
+        return $this->date->format('d/m/Y');
+    }
 
     public function getId(): ?int
     {
@@ -44,6 +49,18 @@ class ConsumptionDate
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getItem(): ?Item
+    {
+        return $this->item;
+    }
+
+    public function setItem(?Item $item): self
+    {
+        $this->item = $item;
 
         return $this;
     }

@@ -1,8 +1,8 @@
-#App\Entity\Product:
-#  product_{1..100}:
-#    ean: '<ean13()>'
-#    brand: '<company()>'
-#    name: '<sentence(2)>'
-#    imageIngredientsUrl: '<imageUrl()>'
-#    imageUrl: '<imageUrl()>'
-#    imageNutritionUrl: '<imageUrl()>'
+App\Entity\Product:
+  product_p_{1..100}:
+    ean: '<ean13()>'
+    brand: '<company()>'
+    name: '<sentence(2)>'
+    imageIngredientsUrl: '<imageUrl()>'
+    imageUrl: '<imageUrl()>'
+    imageNutritionUrl: '<imageUrl()>'

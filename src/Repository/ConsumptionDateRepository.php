@@ -39,28 +39,15 @@ class ConsumptionDateRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return ConsumptionDate[] Returns an array of ConsumptionDate objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findConsumptionDateByDaysBefore(int $days): array
+    {
+        $date = (new \DateTime(sprintf('+ %s days', $days)))->format('Y-m-d');
 
-//    public function findOneBySomeField($value): ?ConsumptionDate
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.date = :val')
+            ->setParameter('val', $date)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

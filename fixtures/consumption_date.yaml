@@ -1,3 +1,4 @@
-#App\Entity\ConsumptionDate:
-#  consumption_date_{1..20}:
-#    date: "<dateTimeBetween('now', '+4 days')>"
+App\Entity\ConsumptionDate:
+  consumption_date_{1..200}:
+    date: "<dateTimeBetween('now', '+10 days')>"
+    item: '@item_<current()>'

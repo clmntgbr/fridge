@@ -96,3 +96,10 @@ init-db: drop create migrate fixture
 
 jwt:
 	@$(DOCKER_COMPOSE) exec php sh -c 'set -e && apk add openssl && bin/console lexik:jwt:generate-keypair --overwrite'
+
+## Starting consumer
+consume:
+	$(PHP) bin/console messenger:consume async_priority_high async_priority_low -vv
+
+consumption_date_notification:
+	$(PHP) bin/console consumption_date_notification

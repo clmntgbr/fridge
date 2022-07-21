@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-exif": "*",
         "ext-iconv": "*",
+        "ext-amqp": "*",
         "api-platform/core": "^2.6",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.5",

@@ -2,13 +2,13 @@
 
 namespace App\Subscriber;
 
+use App\Entity\ConsumptionDateNotification;
 use App\Entity\Fridge;
 use App\Entity\User;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserSubscriber implements EventSubscriber
 {
@@ -42,7 +42,9 @@ class UserSubscriber implements EventSubscriber
             ->setPassword($this->userPasswordHasher->hashPassword($user, $user->getPlainPassword()))
             ->setIsEnable(true)
             ->addFridge(new Fridge())
-            ->eraseCredentials();
+            ->addConsumptionDateNotification((new ConsumptionDateNotification())->setUser($user))
+            ->eraseCredentials()
+        ;
     }
 
     public function preUpdate(LifecycleEventArgs $args): void

@@ -43,6 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Fridge::class, cascade: ['persist'])]
     private Collection $fridges;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ConsumptionDateNotification::class, cascade: ['persist'])]
+    private Collection $consumptionDateNotifications;
+
     private ?string $plainPassword = null;
 
     public function __construct()
@@ -50,6 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->id = rand();
         $this->isEnable = false;
         $this->fridges = new ArrayCollection();
+        $this->consumptionDateNotifications = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -206,6 +210,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($fridge->getUser() === $this) {
                 $fridge->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ConsumptionDateNotification>
+     */
+    public function getConsumptionDateNotifications(): Collection
+    {
+        return $this->consumptionDateNotifications;
+    }
+
+    public function addConsumptionDateNotification(ConsumptionDateNotification $consumptionDateNotification): self
+    {
+        if (!$this->consumptionDateNotifications->contains($consumptionDateNotification)) {
+            $this->consumptionDateNotifications[] = $consumptionDateNotification;
+            $consumptionDateNotification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConsumptionDateNotification(ConsumptionDateNotification $consumptionDateNotification): self
+    {
+        if ($this->consumptionDateNotifications->removeElement($consumptionDateNotification)) {
+            // set the owning side to null (unless already changed)
+            if ($consumptionDateNotification->getUser() === $this) {
+                $consumptionDateNotification->setUser(null);
             }
         }
 
