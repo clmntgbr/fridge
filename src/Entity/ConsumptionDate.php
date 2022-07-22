@@ -28,8 +28,8 @@ class ConsumptionDate
     #[ORM\Column(type: Types::DATE_MUTABLE), Groups(['consumption_date.post']), NotNull, NotBlank, IsDatePassed]
     private \DateTimeInterface $date;
 
-    #[ORM\OneToOne(inversedBy: 'consumptionDate', targetEntity: Item::class, cascade: ['remove'], fetch: 'EXTRA_LAZY'), Groups(['item.read'])]
-    private Item $item;
+    #[ORM\OneToOne(inversedBy: 'consumptionDate', targetEntity: Item::class, cascade: ['remove'], fetch: 'EXTRA_LAZY'), ORM\JoinColumn(nullable: true), Groups(['item.read', 'consumption_date.post'])]
+    private ?Item $item;
 
     public function __toString(): string
     {

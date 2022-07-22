@@ -28,7 +28,7 @@ class ConsumptionDateNotification
 
     public function __toString(): string
     {
-        return (string) $this->daysBefore;
+        return sprintf('%s days before', $this->daysBefore);
     }
 
     public function getId(): ?int

@@ -18,8 +18,12 @@ class ItemType extends AbstractType
             ->add('fridge', null, [
                 'disabled' => true
             ])
-            ->add('product')
-            ->add('consumptionDate')
+            ->add('product', null, [
+                'disabled' => true
+            ])
+            ->add('consumptionDate', null, [
+                'disabled' => true
+            ])
         ;
     }
 

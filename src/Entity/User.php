@@ -43,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Fridge::class, cascade: ['persist'])]
     private Collection $fridges;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ConsumptionDateNotification::class, cascade: ['persist'])]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ConsumptionDateNotification::class, cascade: ['persist']), ORM\OrderBy(['daysBefore' => 'ASC'])]
     private Collection $consumptionDateNotifications;
 
     private ?string $plainPassword = null;

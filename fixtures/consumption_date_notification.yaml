@@ -1,4 +1,4 @@
-App\Entity\ConsumptionDateNotification:
-  consumption_date_notification{1..2}:
-    daysBefore: "<numberBetween(3, 10)>"
-    user: '@user_1'
+#App\Entity\ConsumptionDateNotification:
+#  consumption_date_notification{1..2}:
+#    daysBefore: "<numberBetween(3, 10)>"
+#    user: '@user_1'

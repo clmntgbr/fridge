@@ -20,6 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
     collectionOperations: [
+        'get',
         'post_product_by_ean' => [
             'method' => 'POST',
             'path' => '/products/ean',

@@ -30,11 +30,11 @@ class Item
     #[ORM\ManyToOne(targetEntity: Fridge::class, fetch: 'EXTRA_LAZY', inversedBy: 'items'), Groups(['item.read', 'item.post']), NotBlank, NotNull, IsUserFridge]
     private Fridge $fridge;
 
-    #[ORM\ManyToOne(targetEntity: Product::class, fetch: 'EAGER'), Groups(['item.read', 'item.post']), NotBlank, NotNull]
+    #[ORM\ManyToOne(targetEntity: Product::class ,fetch: 'EAGER'), Groups(['item.read', 'item.post']), NotBlank, NotNull]
     private Product $product;
 
-    #[ORM\OneToOne(mappedBy: 'item', targetEntity: ConsumptionDate::class, cascade: ['remove'], fetch: 'EXTRA_LAZY'), Groups(['item.read'])]
-    private ConsumptionDate $consumptionDate;
+    #[ORM\OneToOne(mappedBy: 'item' ,targetEntity: ConsumptionDate::class, cascade: ['remove'], fetch: 'EXTRA_LAZY'), Groups(['item.read'])]
+    private ?ConsumptionDate $consumptionDate;
 
     public function __construct()
     {
@@ -43,7 +43,7 @@ class Item
 
     public function __toString(): string
     {
-        return sprintf('%s - %s - %s', $this->product->getEan(), $this->product->getName(), $this->consumptionDate->getDate()->format('d/m/Y'));
+        return sprintf('%s - %s - %s', $this->product->getEan(), $this->product->getName(), $this->consumptionDate?->getDate()->format('d/m/Y'));
     }
 
     public function getId(): ?string

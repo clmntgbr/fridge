@@ -11,7 +11,9 @@ class ConsumptionDateNotificationService
 {
     public function __construct(
         private MailerService $mailerService,
-        private FridgeRepository $fridgeRepository
+        private FridgeRepository $fridgeRepository,
+        private string $hostname,
+        private string $subject = 'Some of your products will be out of time soon !'
     ) {
     }
 
@@ -36,15 +38,19 @@ class ConsumptionDateNotificationService
                 continue;
             }
 
+            dd($data);
+
             $email = (new TemplatedEmail())
                 ->from('hello@example.com')
                 ->to($fridge->getUser()->getEmail())
                 ->priority(Email::PRIORITY_HIGH)
-                ->subject('Some of your products will be out of time soon !')
+                ->subject($this->subject)
                 ->htmlTemplate('Email/consumption_date_notification.html.twig')
                 ->context([
                     'fridge_id' => $fridge->getId(),
+                    'subject' => $this->subject,
                     'data' => $data,
+                    'hostname' => $this->hostname,
                 ])
             ;
         }
