@@ -136,8 +136,8 @@
                                     <tr>
                                         <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
                                             <div align="left" class="alignment" style="line-height:10px"><img
-                                                        alt="Recipe 2" src="{{ hostname ~ '/emails/recipe2.png' }}"
-                                                        style="display: block; height: auto; border: 0; width: 197px; max-width: 100%;"
+                                                        alt="Recipe 2" src="{{ hostname ~ '/images/products/' ~ datum.item.product.getImageName }}"
+                                                        style="display: block; height: auto; border: 0; width: 197px; max-width: 100%;max-height: 200px;object-fit: contain;"
                                                         title="Recipe 2" width="197"/></div>
                                         </td>
                                     </tr>
@@ -167,12 +167,12 @@
                                                 <div class="txtTinyMce-wrapper"
                                                      style="font-size: 12px; font-family: Poppins, Arial, Helvetica, sans-serif; mso-line-height-alt: 18px; color: #1d1d1b; line-height: 1.5;">
                                                     <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 24px;">
-                                                        <span style="font-size:16px;"><strong>Salmon, rice and fresh vegetables</strong></span>
+                                                        <span style="font-size:16px;"><strong>{{ datum.item.product.name }}</strong></span>
                                                     </p>
                                                     <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 18px;">
                                                          </p>
                                                     <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 24px;">
-                                                        <span style="font-size:16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</span>
+                                                        <span style="font-size:16px;">{{ datum.item.product.brand }}</span>
                                                     </p>
                                                 </div>
                                             </div>

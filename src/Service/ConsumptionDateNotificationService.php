@@ -18,7 +18,7 @@ class ConsumptionDateNotificationService
     }
 
     /** @param ConsumptionDate[] $consumptionDates */
-    public function group(array $consumptionDates)
+    public function groupByFridge(array $consumptionDates)
     {
         $data = [];
 
@@ -29,7 +29,6 @@ class ConsumptionDateNotificationService
         return $data;
     }
 
-    /** @param ConsumptionDate[] $consumptionDates */
     public function send(array $consumptionDates)
     {
         foreach ($consumptionDates as $key => $data) {
@@ -38,23 +37,23 @@ class ConsumptionDateNotificationService
                 continue;
             }
 
-            dd($data);
-
-            $email = (new TemplatedEmail())
-                ->from('hello@example.com')
-                ->to($fridge->getUser()->getEmail())
-                ->priority(Email::PRIORITY_HIGH)
-                ->subject($this->subject)
-                ->htmlTemplate('Email/consumption_date_notification.html.twig')
-                ->context([
-                    'fridge_id' => $fridge->getId(),
-                    'subject' => $this->subject,
-                    'data' => $data,
-                    'hostname' => $this->hostname,
+//            dump($data[0]->getItem()->getProduct()->getImageIngredientsName());
+//            die;
+            
+            $this->mailerService->send(
+                (new TemplatedEmail())
+                    ->from('alert@fridge.com')
+                    ->to($fridge->getUser()->getEmail())
+                    ->priority(Email::PRIORITY_HIGH)
+                    ->subject($this->subject)
+                    ->htmlTemplate('Email/consumption_date_notification.html.twig')
+                    ->context([
+                        'fridge_id' => $fridge->getId(),
+                        'subject' => $this->subject,
+                        'data' => $data,
+                        'hostname' => $this->hostname,
                 ])
-            ;
+            );
         }
-
-        $this->mailerService->send($email);
     }
 }

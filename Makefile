@@ -48,6 +48,8 @@ start:
 stop:
 	@$(DOCKER_COMPOSE) down
 
+restart: stop start
+
 ## Entering php shell
 php:
 	@$(DOCKER_COMPOSE) exec php sh
