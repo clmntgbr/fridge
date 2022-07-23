@@ -22,7 +22,8 @@ class ItemType extends AbstractType
                 'disabled' => true
             ])
             ->add('consumptionDate', null, [
-                'disabled' => true
+                'disabled' => true,
+                'widget' => 'single_text',
             ])
         ;
     }

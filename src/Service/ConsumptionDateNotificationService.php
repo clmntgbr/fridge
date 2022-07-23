@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\ConsumptionDate;
+use App\Entity\Item;
 use App\Repository\FridgeRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Email;
@@ -17,29 +17,26 @@ class ConsumptionDateNotificationService
     ) {
     }
 
-    /** @param ConsumptionDate[] $consumptionDates */
-    public function groupByFridge(array $consumptionDates)
+    /** @param Item[] $items */
+    public function groupByFridge(array $items)
     {
         $data = [];
 
-        foreach ($consumptionDates as $consumptionDate) {
-            $data[$consumptionDate->getItem()->getFridge()->getId()][] = $consumptionDate;
+        foreach ($items as $item) {
+            $data[$item->getFridge()->getId()][] = $item;
         }
 
         return $data;
     }
 
-    public function send(array $consumptionDates)
+    public function send(array $items)
     {
-        foreach ($consumptionDates as $key => $data) {
+        foreach ($items as $key => $data) {
             $fridge = $this->fridgeRepository->findOneBy(['id' => $key]);
             if (null === $fridge) {
                 continue;
             }
 
-//            dump($data[0]->getItem()->getProduct()->getImageIngredientsName());
-//            die;
-            
             $this->mailerService->send(
                 (new TemplatedEmail())
                     ->from('alert@fridge.com')

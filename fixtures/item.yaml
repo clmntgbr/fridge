@@ -2,4 +2,4 @@
 #  item_{1..200}:
 #    fridge: '@fridge_1'
 #    product: '@product_p_*'
-#    consumptionDate: '@consumption_date_<current()>'
+#    consumptionDate: "<dateTimeBetween('now', '+10 days')>"

@@ -6,6 +6,7 @@ use App\Entity\Fridge;
 use App\Form\ItemType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -26,9 +27,11 @@ class FridgeCrudController extends AbstractCrudController
             IdField::new('id')->setDisabled(),
             NumberField::new('itemsCount')->hideOnForm(),
             TextField::new('name'),
+            BooleanField::new('isDefault'),
             AssociationField::new('user')->setDisabled(),
             CollectionField::new('items')
                 ->setEntryIsComplex()
+                ->setDisabled(true)
                 ->setEntryType(ItemType::class)
                 ->hideOnIndex()
         ];

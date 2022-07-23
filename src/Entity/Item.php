@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ItemRepository;
 use App\Service\Uuid;
+use App\Validator\Constraints\IsDatePassed;
 use App\Validator\Constraints\IsUserFridge;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +19,7 @@ use Symfony\Component\Validator\Constraints\NotNull;
         'post' => ['denormalization_context' => ['groups' => 'item.post']],
         'get'
     ],
-    itemOperations: ['get'],
+    itemOperations: ['get', 'patch' => ['denormalization_context' => ['groups' => 'item.put']]],
     normalizationContext: ['groups' => ['item.read']]
 )]
 class Item
@@ -33,8 +34,8 @@ class Item
     #[ORM\ManyToOne(targetEntity: Product::class ,fetch: 'EAGER'), Groups(['item.read', 'item.post']), NotBlank, NotNull]
     private Product $product;
 
-    #[ORM\OneToOne(mappedBy: 'item' ,targetEntity: ConsumptionDate::class, cascade: ['remove'], fetch: 'EXTRA_LAZY'), Groups(['item.read'])]
-    private ?ConsumptionDate $consumptionDate;
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true), Groups(['item.put', 'item.post', 'item.read']), IsDatePassed]
+    private ?\DateTimeInterface $consumptionDate;
 
     public function __construct()
     {
@@ -43,7 +44,7 @@ class Item
 
     public function __toString(): string
     {
-        return sprintf('%s - %s - %s', $this->product->getEan(), $this->product->getName(), $this->consumptionDate?->getDate()->format('d/m/Y'));
+        return sprintf('%s - %s - %s', $this->product->getEan(), $this->product->getName(), $this->consumptionDate?->format('d/m/Y'));
     }
 
     public function getId(): ?string
@@ -82,12 +83,12 @@ class Item
         return $this;
     }
 
-    public function getConsumptionDate(): ?ConsumptionDate
+    public function getConsumptionDate(): ?\DateTimeInterface
     {
         return $this->consumptionDate;
     }
 
-    public function setConsumptionDate(?ConsumptionDate $ConsumptionDate): self
+    public function setConsumptionDate(?\DateTimeInterface $ConsumptionDate): self
     {
         $this->consumptionDate = $ConsumptionDate;
 
