@@ -30,16 +30,20 @@ class Fridge
     #[ORM\Column(type: Types::STRING), Groups(['fridge.read'])]
     private string $name;
 
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private string $isDefault;
+
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY', inversedBy: 'fridges'), ORM\JoinTable(name: 'user_id'), Groups(['fridge.read'])]
     private User $user;
 
-    #[ORM\OneToMany(mappedBy: 'fridge', targetEntity: Item::class, cascade: ['remove'])]
+    #[ORM\OneToMany(mappedBy: 'fridge', targetEntity: Item::class, cascade: ['remove']), ORM\OrderBy(['consumptionDate' => 'ASC'])]
     private Collection $items;
 
     public function __construct()
     {
         $this->id = Uuid::v4();
         $this->name = 'Default';
+        $this->isDefault = false;
         $this->items = new ArrayCollection();
     }
 
@@ -111,5 +115,17 @@ class Fridge
     public function getItemsCount(): int
     {
         return $this->items->count();
+    }
+
+    public function isIsDefault(): ?bool
+    {
+        return $this->isDefault;
+    }
+
+    public function setIsDefault(bool $isDefault): self
+    {
+        $this->isDefault = $isDefault;
+
+        return $this;
     }
 }

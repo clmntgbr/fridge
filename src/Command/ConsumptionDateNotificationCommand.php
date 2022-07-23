@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Repository\ConsumptionDateNotificationRepository;
 use App\Repository\ConsumptionDateRepository;
+use App\Repository\ItemRepository;
 use App\Service\ConsumptionDateNotificationService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -18,7 +19,7 @@ class ConsumptionDateNotificationCommand extends Command
 {
     public function __construct(
         private ConsumptionDateNotificationRepository $consumptionDateNotificationRepository,
-        private ConsumptionDateRepository $consumptionDateRepository,
+        private ItemRepository $itemRepository,
         private ConsumptionDateNotificationService $consumptionDateNotificationService,
         string                        $name = null
     )
@@ -36,8 +37,8 @@ class ConsumptionDateNotificationCommand extends Command
         $consumptionDateNotifications = $this->consumptionDateNotificationRepository->findAll();
 
         foreach ($consumptionDateNotifications as $consumptionDateNotification) {
-            $consumptionDates = $this->consumptionDateRepository->findConsumptionDateByDaysBefore($consumptionDateNotification->getDaysBefore());
-            $data = $this->consumptionDateNotificationService->groupByFridge($consumptionDates);
+            $items = $this->itemRepository->findConsumptionDateByDaysBefore($consumptionDateNotification->getDaysBefore());
+            $data = $this->consumptionDateNotificationService->groupByFridge($items);
             $this->consumptionDateNotificationService->send($data);
         }
 

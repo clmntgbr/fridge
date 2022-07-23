@@ -23,10 +23,6 @@ services:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
 
-    App\Subscriber\ConsumptionDateSubscriber:
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-
     App\Subscriber\UserSubscriber:
         tags:
             - { name: doctrine.event_subscriber, connection: default }

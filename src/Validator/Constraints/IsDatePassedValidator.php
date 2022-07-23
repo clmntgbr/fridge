@@ -16,6 +16,10 @@ class IsDatePassedValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
+        if (null === $value) {
+            return;
+        }
+
         if (!$value instanceof \DateTime) {
             $this->context->addViolation($constraint->isDateNotCorrect);
         }

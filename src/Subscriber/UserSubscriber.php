@@ -41,7 +41,7 @@ class UserSubscriber implements EventSubscriber
         $user
             ->setPassword($this->userPasswordHasher->hashPassword($user, $user->getPlainPassword()))
             ->setIsEnable(true)
-            ->addFridge(new Fridge())
+            ->addFridge((new Fridge())->setIsDefault(true))
             ->addConsumptionDateNotification((new ConsumptionDateNotification())->setUser($user))
             ->eraseCredentials()
         ;
