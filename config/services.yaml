@@ -31,7 +31,7 @@ services:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
 
-    App\Subscriber\ConsumptionDateNotificationSubscriber:
+    App\Subscriber\ExpirationDateNotificationSubscriber:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
 

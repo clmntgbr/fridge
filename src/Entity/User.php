@@ -43,8 +43,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Fridge::class, cascade: ['persist'])]
     private Collection $fridges;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ConsumptionDateNotification::class, cascade: ['persist']), ORM\OrderBy(['daysBefore' => 'ASC'])]
-    private Collection $consumptionDateNotifications;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ExpirationDateNotification::class, cascade: ['persist']), ORM\OrderBy(['daysBefore' => 'ASC'])]
+    private Collection $expirationDateNotifications;
 
     private ?string $plainPassword = null;
 
@@ -53,7 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->id = rand();
         $this->isEnable = false;
         $this->fridges = new ArrayCollection();
-        $this->consumptionDateNotifications = new ArrayCollection();
+        $this->expirationDateNotifications = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -217,29 +217,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, ConsumptionDateNotification>
+     * @return Collection<int, ExpirationDateNotification>
      */
-    public function getConsumptionDateNotifications(): Collection
+    public function getExpirationDateNotifications(): Collection
     {
-        return $this->consumptionDateNotifications;
+        return $this->expirationDateNotifications;
     }
 
-    public function addConsumptionDateNotification(ConsumptionDateNotification $consumptionDateNotification): self
+    public function addExpirationDateNotification(ExpirationDateNotification $expirationDateNotification): self
     {
-        if (!$this->consumptionDateNotifications->contains($consumptionDateNotification)) {
-            $this->consumptionDateNotifications[] = $consumptionDateNotification;
-            $consumptionDateNotification->setUser($this);
+        if (!$this->expirationDateNotifications->contains($expirationDateNotification)) {
+            $this->expirationDateNotifications[] = $expirationDateNotification;
+            $expirationDateNotification->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeConsumptionDateNotification(ConsumptionDateNotification $consumptionDateNotification): self
+    public function removeExpirationDateNotification(ExpirationDateNotification $expirationDateNotification): self
     {
-        if ($this->consumptionDateNotifications->removeElement($consumptionDateNotification)) {
+        if ($this->expirationDateNotifications->removeElement($expirationDateNotification)) {
             // set the owning side to null (unless already changed)
-            if ($consumptionDateNotification->getUser() === $this) {
-                $consumptionDateNotification->setUser(null);
+            if ($expirationDateNotification->getUser() === $this) {
+                $expirationDateNotification->setUser(null);
             }
         }
 

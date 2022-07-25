@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\ConsumptionDateNotification;
+use App\Entity\ExpirationDateNotification;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ConsumptionDateNotification>
+ * @extends ServiceEntityRepository<ExpirationDateNotification>
  *
- * @method ConsumptionDateNotification|null find($id, $lockMode = null, $lockVersion = null)
- * @method ConsumptionDateNotification|null findOneBy(array $criteria, array $orderBy = null)
- * @method ConsumptionDateNotification[]    findAll()
- * @method ConsumptionDateNotification[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ExpirationDateNotification|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ExpirationDateNotification|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ExpirationDateNotification[]    findAll()
+ * @method ExpirationDateNotification[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ConsumptionDateNotificationRepository extends ServiceEntityRepository
+class ExpirationDateNotificationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ConsumptionDateNotification::class);
+        parent::__construct($registry, ExpirationDateNotification::class);
     }
 
-    public function add(ConsumptionDateNotification $entity, bool $flush = false): void
+    public function add(ExpirationDateNotification $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ConsumptionDateNotificationRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(ConsumptionDateNotification $entity, bool $flush = false): void
+    public function remove(ExpirationDateNotification $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class ConsumptionDateNotificationRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return ConsumptionDateNotification[] Returns an array of ConsumptionDateNotification objects
+//     * @return ExpirationDateNotification[] Returns an array of ExpirationDateNotification objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class ConsumptionDateNotificationRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?ConsumptionDateNotification
+//    public function findOneBySomeField($value): ?ExpirationDateNotification
 //    {
 //        return $this->createQueryBuilder('n')
 //            ->andWhere('n.exampleField = :val')

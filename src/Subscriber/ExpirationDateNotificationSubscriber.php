@@ -2,13 +2,13 @@
 
 namespace App\Subscriber;
 
-use App\Entity\ConsumptionDateNotification;
+use App\Entity\ExpirationDateNotification;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Symfony\Component\Security\Core\Security;
 
-class ConsumptionDateNotificationSubscriber implements EventSubscriber
+class ExpirationDateNotificationSubscriber implements EventSubscriber
 {
     public function __construct(
         private Security $security
@@ -27,7 +27,7 @@ class ConsumptionDateNotificationSubscriber implements EventSubscriber
     {
         $entity = $args->getObject();
 
-        if (!$entity instanceof ConsumptionDateNotification) {
+        if (!$entity instanceof ExpirationDateNotification) {
             return;
         }
 

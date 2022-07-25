@@ -2,12 +2,11 @@
 
 namespace App\Service;
 
-use App\Entity\Item;
 use App\Repository\FridgeRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Email;
 
-class ConsumptionDateNotificationService
+class ExpirationDateNotificationService
 {
     public function __construct(
         private MailerService $mailerService,
@@ -15,18 +14,6 @@ class ConsumptionDateNotificationService
         private string $hostname,
         private string $subject = 'Some of your products will be out of time soon !'
     ) {
-    }
-
-    /** @param Item[] $items */
-    public function groupByFridge(array $items)
-    {
-        $data = [];
-
-        foreach ($items as $item) {
-            $data[$item->getFridge()->getId()][] = $item;
-        }
-
-        return $data;
     }
 
     public function send(array $items, string $key)
@@ -42,7 +29,7 @@ class ConsumptionDateNotificationService
                 ->to($fridge->getUser()->getEmail())
                 ->priority(Email::PRIORITY_HIGH)
                 ->subject($this->subject)
-                ->htmlTemplate('Email/consumption_date_notification.html.twig')
+                ->htmlTemplate('Email/expiration_date_notification.html.twig')
                 ->context([
                     'fridge_id' => $fridge->getId(),
                     'subject' => $this->subject,

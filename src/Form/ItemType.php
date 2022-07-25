@@ -21,7 +21,7 @@ class ItemType extends AbstractType
             ->add('product', null, [
                 'disabled' => true
             ])
-            ->add('consumptionDate', null, [
+            ->add('expirationDate', null, [
                 'disabled' => true,
                 'widget' => 'single_text',
             ])

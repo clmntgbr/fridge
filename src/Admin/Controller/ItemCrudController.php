@@ -23,7 +23,7 @@ class ItemCrudController extends AbstractCrudController
             IdField::new('id')->setDisabled(),
             AssociationField::new('fridge'),
             AssociationField::new('product'),
-            DateField::new('consumptionDate'),
+            DateField::new('expirationDate'),
         ];
     }
 }

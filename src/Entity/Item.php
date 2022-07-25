@@ -35,7 +35,7 @@ class Item
     private Product $product;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true), Groups(['item.put', 'item.post', 'item.read']), IsDatePassed]
-    private ?\DateTimeInterface $consumptionDate;
+    private ?\DateTimeInterface $expirationDate;
 
     public function __construct()
     {
@@ -44,7 +44,7 @@ class Item
 
     public function __toString(): string
     {
-        return sprintf('%s - %s - %s', $this->product->getEan(), $this->product->getName(), $this->consumptionDate?->format('d/m/Y'));
+        return sprintf('%s - %s - %s', $this->product->getEan(), $this->product->getName(), $this->expirationDate?->format('d/m/Y'));
     }
 
     public function getId(): ?string
@@ -83,14 +83,14 @@ class Item
         return $this;
     }
 
-    public function getConsumptionDate(): ?\DateTimeInterface
+    public function getExpirationDate(): ?\DateTimeInterface
     {
-        return $this->consumptionDate;
+        return $this->expirationDate;
     }
 
-    public function setConsumptionDate(?\DateTimeInterface $ConsumptionDate): self
+    public function setExpirationDate(?\DateTimeInterface $ExpirationDate): self
     {
-        $this->consumptionDate = $ConsumptionDate;
+        $this->expirationDate = $ExpirationDate;
 
         return $this;
     }

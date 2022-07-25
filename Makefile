@@ -103,5 +103,5 @@ jwt:
 consume:
 	$(PHP) bin/console messenger:consume async_priority_high async_priority_low -vv
 
-consumption_date_notification:
-	$(PHP) bin/console consumption_date_notification
+expiration_date_notification:
+	$(PHP) bin/console expiration_date_notification

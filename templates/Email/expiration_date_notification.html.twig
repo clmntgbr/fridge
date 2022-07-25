@@ -49,7 +49,7 @@
                                                  style="font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 18px; color: #225431; line-height: 1.5;">
                                                 <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 24px;">
                                                     <span style="font-size:16px;">
-                                                        {{ items_count }} product(s) are going out of date of consumption.
+                                                        {{ items_count }} product(s) are going out of date of expiration.
                                                     </span>
                                                 </p>
                                             </div>
@@ -193,7 +193,7 @@
                                     <tr>
                                         <td class="pad"
                                             style="padding-bottom:45px;padding-top:20px;text-align:center;width:100%;">
-                                            <h3 style="margin: 0; color: #6aad72; direction: ltr; font-family: Poppins, Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 400; letter-spacing: normal; line-height: 180%; text-align: left; margin-top: 0; margin-bottom: 0;">{{ datum.consumptionDate|date('d/m/Y') }}</h3>
+                                            <h3 style="margin: 0; color: #6aad72; direction: ltr; font-family: Poppins, Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 400; letter-spacing: normal; line-height: 180%; text-align: left; margin-top: 0; margin-bottom: 0;">{{ datum.expirationDate|date('d/m/Y') }}</h3>
                                         </td>
                                     </tr>
                                 </table>

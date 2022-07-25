@@ -3,7 +3,7 @@
 namespace App\Admin\Controller;
 
 use App\Entity\User;
-use App\Form\ConsumptionDateNotificationType;
+use App\Form\ExpirationDateNotificationType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
@@ -23,10 +23,10 @@ class UserCrudController extends AbstractCrudController
             IdField::new('id')->setDisabled(),
             TextField::new('email'),
             Field::new('isEnable'),
-            CollectionField::new('consumptionDateNotifications')
+            CollectionField::new('expirationDateNotifications')
                 ->hideOnIndex()
                 ->setEntryIsComplex()
-                ->setEntryType(ConsumptionDateNotificationType::class)
+                ->setEntryType(ExpirationDateNotificationType::class)
         ];
     }
 }

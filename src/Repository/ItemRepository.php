@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\ConsumptionDateNotification;
+use App\Entity\ExpirationDateNotification;
 use App\Entity\Fridge;
 use App\Entity\Item;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -41,12 +41,12 @@ class ItemRepository extends ServiceEntityRepository
         }
     }
 
-    public function findItemsByDaysBefore(ConsumptionDateNotification $consumptionDateNotification, Fridge $fridge): array
+    public function findItemsByDaysBefore(ExpirationDateNotification $expirationDateNotification, Fridge $fridge): array
     {
-        $date = (new \DateTime(sprintf('+ %s days', $consumptionDateNotification->getDaysBefore())))->format('Y-m-d');
+        $date = (new \DateTime(sprintf('+ %s days', $expirationDateNotification->getDaysBefore())))->format('Y-m-d');
 
         return $this->createQueryBuilder('c')
-            ->andWhere('c.consumptionDate = :val')
+            ->andWhere('c.expirationDate = :val')
             ->andWhere('c.fridge = :fridge')
             ->setParameters([
                 'fridge' => $fridge,

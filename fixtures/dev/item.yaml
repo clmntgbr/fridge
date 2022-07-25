@@ -2,4 +2,4 @@ App\Entity\Item:
   item_{1..2000}:
     fridge: '@fridge_*'
     product: '@pproduct_*'
-    consumptionDate: "<dateTimeBetween('now', '+10 days')>"
+    expirationDate: "<dateTimeBetween('now', '+10 days')>"

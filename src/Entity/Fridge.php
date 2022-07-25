@@ -36,7 +36,7 @@ class Fridge
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY', inversedBy: 'fridges'), ORM\JoinTable(name: 'user_id'), Groups(['fridge.read'])]
     private User $user;
 
-    #[ORM\OneToMany(mappedBy: 'fridge', targetEntity: Item::class, cascade: ['remove']), ORM\OrderBy(['consumptionDate' => 'ASC'])]
+    #[ORM\OneToMany(mappedBy: 'fridge', targetEntity: Item::class, cascade: ['remove']), ORM\OrderBy(['expirationDate' => 'ASC'])]
     private Collection $items;
 
     public function __construct()

@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\ConsumptionDateNotification;
+use App\Entity\ExpirationDateNotification;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ConsumptionDateNotificationType extends AbstractType
+class ExpirationDateNotificationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -20,7 +20,7 @@ class ConsumptionDateNotificationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ConsumptionDateNotification::class,
+            'data_class' => ExpirationDateNotification::class,
         ]);
     }
 }

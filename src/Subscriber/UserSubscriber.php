@@ -2,7 +2,7 @@
 
 namespace App\Subscriber;
 
-use App\Entity\ConsumptionDateNotification;
+use App\Entity\ExpirationDateNotification;
 use App\Entity\Fridge;
 use App\Entity\User;
 use Doctrine\Common\EventSubscriber;
@@ -42,7 +42,7 @@ class UserSubscriber implements EventSubscriber
             ->setPassword($this->userPasswordHasher->hashPassword($user, $user->getPlainPassword()))
             ->setIsEnable(true)
             ->addFridge((new Fridge())->setIsDefault(true))
-            ->addConsumptionDateNotification((new ConsumptionDateNotification())->setUser($user))
+            ->addExpirationDateNotification((new ExpirationDateNotification())->setUser($user))
             ->eraseCredentials()
         ;
     }

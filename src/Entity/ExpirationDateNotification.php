@@ -3,13 +3,13 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ConsumptionDateNotificationRepository;
+use App\Repository\ExpirationDateNotificationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ConsumptionDateNotificationRepository::class)]
+#[ORM\Entity(repositoryClass: ExpirationDateNotificationRepository::class)]
 #[ApiResource]
-class ConsumptionDateNotification
+class ExpirationDateNotification
 {
 
     #[ORM\Id, ORM\GeneratedValue, ORM\Column(type: Types::INTEGER)]
@@ -18,7 +18,7 @@ class ConsumptionDateNotification
     #[ORM\Column(type: Types::INTEGER)]
     private string $daysBefore;
 
-    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY', inversedBy: 'consumptionDateNotifications')]
+    #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY', inversedBy: 'expirationDateNotifications')]
     private ?User $user;
 
     public function __construct()
