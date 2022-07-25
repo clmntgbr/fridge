@@ -1,5 +1,0 @@
-#App\Entity\Item:
-#  item_{1..200}:
-#    fridge: '@fridge_1'
-#    product: '@product_p_*'
-#    consumptionDate: "<dateTimeBetween('now', '+10 days')>"

@@ -37,9 +37,13 @@ class ConsumptionDateNotificationCommand extends Command
         $consumptionDateNotifications = $this->consumptionDateNotificationRepository->findAll();
 
         foreach ($consumptionDateNotifications as $consumptionDateNotification) {
-            $items = $this->itemRepository->findConsumptionDateByDaysBefore($consumptionDateNotification->getDaysBefore());
-            $data = $this->consumptionDateNotificationService->groupByFridge($items);
-            $this->consumptionDateNotificationService->send($data);
+            foreach ($consumptionDateNotification->getUser()->getFridges() as $fridge) {
+                $items = $this->itemRepository->findItemsByDaysBefore($consumptionDateNotification, $fridge);
+                if (count($items) === 0) {
+                    continue;
+                }
+                $this->consumptionDateNotificationService->send($items, $fridge->getId());
+            }
         }
 
         return Command::SUCCESS;

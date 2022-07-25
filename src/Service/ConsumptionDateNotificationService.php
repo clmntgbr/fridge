@@ -29,28 +29,27 @@ class ConsumptionDateNotificationService
         return $data;
     }
 
-    public function send(array $items)
+    public function send(array $items, string $key)
     {
-        foreach ($items as $key => $data) {
-            $fridge = $this->fridgeRepository->findOneBy(['id' => $key]);
-            if (null === $fridge) {
-                continue;
-            }
-
-            $this->mailerService->send(
-                (new TemplatedEmail())
-                    ->from('alert@fridge.com')
-                    ->to($fridge->getUser()->getEmail())
-                    ->priority(Email::PRIORITY_HIGH)
-                    ->subject($this->subject)
-                    ->htmlTemplate('Email/consumption_date_notification.html.twig')
-                    ->context([
-                        'fridge_id' => $fridge->getId(),
-                        'subject' => $this->subject,
-                        'data' => $data,
-                        'hostname' => $this->hostname,
-                ])
-            );
+        $fridge = $this->fridgeRepository->findOneBy(['id' => $key]);
+        if (null === $fridge) {
+            return;
         }
+
+        $this->mailerService->send(
+            (new TemplatedEmail())
+                ->from('alert@fridge.com')
+                ->to($fridge->getUser()->getEmail())
+                ->priority(Email::PRIORITY_HIGH)
+                ->subject($this->subject)
+                ->htmlTemplate('Email/consumption_date_notification.html.twig')
+                ->context([
+                    'fridge_id' => $fridge->getId(),
+                    'subject' => $this->subject,
+                    'items_count' => count($items),
+                    'data' => $items,
+                    'hostname' => $this->hostname,
+                ])
+        );
     }
 }

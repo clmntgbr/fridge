@@ -56,6 +56,9 @@ class Product
     #[ORM\Column(type: Types::ARRAY)]
     private array $data = [];
 
+    #[ORM\Column(type: Types::STRING), Groups(['product.read'])]
+    private string $imagesDirectory;
+
     #[Vich\UploadableField(mapping: 'product_image', fileNameProperty:'image.name', size:'image.size', mimeType:'image.mimeType', originalName:'image.originalName', dimensions:'image.dimensions')]
     private ?File $imageFile = null;
 
@@ -82,6 +85,7 @@ class Product
 
     public function __construct()
     {
+        $this->imagesDirectory = '/fixtures/images/products/';
         $this->productStatusHistories = new ArrayCollection();
         $this->image = new \Vich\UploaderBundle\Entity\File();
         $this->imageIngredients = new \Vich\UploaderBundle\Entity\File();
@@ -338,5 +342,17 @@ class Product
     public function getImageNutrition(): ?EmbeddedFile
     {
         return $this->imageNutrition;
+    }
+
+    public function getImagesDirectory(): ?string
+    {
+        return $this->imagesDirectory;
+    }
+
+    public function setImagesDirectory(string $imagesDirectory): self
+    {
+        $this->imagesDirectory = $imagesDirectory;
+
+        return $this;
     }
 }

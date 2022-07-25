@@ -22,6 +22,8 @@ class ProductCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $imagesDirectory = '/images/products/';
+
         return [
             FormField::addPanel('Product Details'),
             IdField::new('id')->setDisabled(true),
@@ -29,6 +31,7 @@ class ProductCrudController extends AbstractCrudController
             TextField::new('name'),
             TextField::new('brand'),
             AssociationField::new('productStatus'),
+            TextField::new('imagesDirectory'),
 
             FormField::addPanel('Image'),
             TextField::new('imageFile', 'Upload')
@@ -36,7 +39,7 @@ class ProductCrudController extends AbstractCrudController
                 ->onlyOnForms(),
             ImageField::new('image.name', 'Image')
                 ->setRequired(true)
-                ->setBasePath('/images/products/')
+                ->setBasePath($imagesDirectory)
                 ->hideOnForm(),
             TextField::new('image.name', 'Name')->setDisabled()->hideOnIndex(),
             TextField::new('image.originalName', 'originalName')->setDisabled()->hideOnIndex(),
@@ -50,7 +53,7 @@ class ProductCrudController extends AbstractCrudController
                 ->onlyOnForms(),
             ImageField::new('imageIngredients.name', 'Image Ingredients')
                 ->setRequired(true)
-                ->setBasePath('/images/products/')
+                ->setBasePath($imagesDirectory)
                 ->hideOnForm(),
             TextField::new('imageIngredients.name', 'Name')->setDisabled()->hideOnIndex(),
             TextField::new('imageIngredients.originalName', 'originalName')->setDisabled()->hideOnIndex(),
@@ -64,7 +67,7 @@ class ProductCrudController extends AbstractCrudController
                 ->onlyOnForms(),
             ImageField::new('imageNutrition.name', 'Image Nutrition')
                 ->setRequired(true)
-                ->setBasePath('/images/products/')
+                ->setBasePath($imagesDirectory)
                 ->hideOnForm(),
             TextField::new('imageNutrition.name', 'Name')->setDisabled()->hideOnIndex(),
             TextField::new('imageNutrition.originalName', 'originalName')->setDisabled()->hideOnIndex(),

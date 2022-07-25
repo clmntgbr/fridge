@@ -14,4 +14,3 @@
 .env
 symfony.lock
 /public/gas_price/
-/public/images/

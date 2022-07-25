@@ -80,7 +80,7 @@ create:
 
 ## Load fixtures
 fixture:
-	$(PHP) bin/console hautelook:fixtures:load --no-interaction
+	$(PHP) bin/console hautelook:fixtures:load --env=dev --no-interaction
 
 ## Making migration file
 migration:
