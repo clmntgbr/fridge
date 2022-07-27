@@ -5,19 +5,23 @@ namespace App\Service;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PostProductByEanService
 {
     private Product $product;
+    private ?string $date = null;
 
     public function __construct(
         private ValidatorInterface     $validator,
         private ProductRepository      $productRepository,
         private OpenFoodFactApiService $openFoodFactApiService,
         private EntityManagerInterface $em,
-        private GetImage $getImage
+        private GetImage $getImage,
+        private Filesystem $filesystem,
+        private OcrService $ocrService
     )
     {
     }
@@ -44,6 +48,38 @@ class PostProductByEanService
         return $this;
     }
 
+    public function download(): self
+    {
+        if (null === $this->product->getFile()) {
+            return $this;
+        }
+
+        $filename = sprintf('%s.%s', uniqid(), $this->product->getFile()->guessExtension());
+
+        $this->product->getFile()->move('images/ocr', $filename);
+
+        $this->product->setOcrFilePath(sprintf('images/ocr/%s', $filename));
+
+        return $this;
+    }
+
+    public function ocr(): self
+    {
+        if (null === $this->product->getOcrFilePath()) {
+            return $this;
+        }
+
+        $this->date = $this->ocrService
+            ->resize()
+            ->recognize()
+            ->find()
+        ;
+
+        $this->filesystem->remove($this->product->getOcrFilePath());
+
+        return $this;
+    }
+
     public function find(): Product
     {
         $product = $this->productRepository->findOneBy(['ean' => $this->product->getEan()]);
@@ -54,6 +90,7 @@ class PostProductByEanService
         }
 
         $product->setFile($this->product->getFile());
+        $product->setOcrDate($this->date);
 
         return $product;
     }

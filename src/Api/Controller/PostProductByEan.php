@@ -21,6 +21,8 @@ class PostProductByEan
         return $this->postProductByEanService
             ->hydrate($request)
             ->validate()
+            ->download()
+            ->ocr()
             ->find()
         ;
     }

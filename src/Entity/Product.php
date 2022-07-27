@@ -41,6 +41,12 @@ class Product
     #[Groups(['product.post'])]
     private ?UploadedFile $file;
 
+    #[Groups(['product.post', 'product.read'])]
+    private string $ocrFilePath;
+
+    #[Groups(['product.post', 'product.read'])]
+    private ?string $ocrDate;
+
     #[ORM\Id, ORM\GeneratedValue, ORM\Column(type: Types::INTEGER), Groups(['product.read'])]
     private ?int $id;
 
@@ -354,5 +360,25 @@ class Product
         $this->imagesDirectory = $imagesDirectory;
 
         return $this;
+    }
+
+    public function getOcrFilePath(): string
+    {
+        return $this->ocrFilePath;
+    }
+
+    public function setOcrFilePath(string $ocrFilePath): void
+    {
+        $this->ocrFilePath = $ocrFilePath;
+    }
+
+    public function getOcrDate(): ?string
+    {
+        return $this->ocrDate;
+    }
+
+    public function setOcrDate(?string $ocrDate): void
+    {
+        $this->ocrDate = $ocrDate;
     }
 }
