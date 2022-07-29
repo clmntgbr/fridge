@@ -3,6 +3,8 @@ ARG PHP_VERSION=8.1.3
 FROM php:${PHP_VERSION}-fpm-alpine as symfony_php
 
 RUN apk add git
+RUN apk add nodejs
+RUN apk add npm
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -47,6 +49,7 @@ RUN set -xe \
     && apk del .build-deps \
     && rm -rf /tmp/* /usr/local/lib/php/doc/* /var/cache/apk/*;
 
+
 ENV EXT_AMQP_VERSION=master
 
 RUN docker-php-source extract \
@@ -63,12 +66,17 @@ ENV COMPOSER_HOME /tmp
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN find /tmp -type d -exec chmod -v 1777 {} +
 
+#RUN chown -R www-data:www-data /srv/app
+#USER www-data
+
+COPY assets assets
 COPY bin bin
+COPY config config
+COPY fixtures fixtures
+COPY migrations migrations
+COPY public public
+COPY src src
 COPY templates templates
 COPY translations translations
-COPY public public
-COPY config config
-COPY migrations migrations
-COPY src src
 
 ENTRYPOINT ["php-fpm"]

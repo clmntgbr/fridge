@@ -40,7 +40,10 @@
         "symfony/security-bundle": "6.0.*",
         "symfony/serializer": "6.0.*",
         "symfony/twig-bundle": "6.0.*",
+        "symfony/ux-live-component": "^2.3",
+        "symfony/ux-twig-component": "^2.3",
         "symfony/validator": "6.0.*",
+        "symfony/webpack-encore-bundle": "^1.15",
         "symfony/yaml": "6.0.*",
         "thecodingmachine/safe": "^2.2",
         "vich/uploader-bundle": "^1.19"
