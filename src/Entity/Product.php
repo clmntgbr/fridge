@@ -59,8 +59,8 @@ class Product
     #[ORM\Column(type: Types::STRING), Groups(['product.read'])]
     private string $brand;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $data = [];
+    #[ORM\ManyToOne(targetEntity: Nutrition::class, cascade: ['persist'], fetch: 'EAGER'), Groups(['product.read'])]
+    private Nutrition $nutrition;
 
     #[ORM\Column(type: Types::STRING), Groups(['product.read'])]
     private string $imagesDirectory;
@@ -91,7 +91,8 @@ class Product
 
     public function __construct()
     {
-        $this->imagesDirectory = '/fixtures/images/products/';
+        $this->nutrition = new Nutrition();
+        $this->imagesDirectory = '/images/products/';
         $this->productStatusHistories = new ArrayCollection();
         $this->image = new \Vich\UploaderBundle\Entity\File();
         $this->imageIngredients = new \Vich\UploaderBundle\Entity\File();
@@ -177,24 +178,6 @@ class Product
     public function getImageIngredientsUrl(): ?string
     {
         return $this->imageIngredientsUrl;
-    }
-
-    /**
-     * @return array<mixed>
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param array<mixed> $element
-     */
-    public function setData(array $element): self
-    {
-        $this->data = $element;
-
-        return $this;
     }
 
     public function setImageIngredientsUrl(string $imageIngredientsUrl): self
@@ -380,5 +363,17 @@ class Product
     public function setOcrDate(?string $ocrDate): void
     {
         $this->ocrDate = $ocrDate;
+    }
+
+    public function getNutrition(): ?Nutrition
+    {
+        return $this->nutrition;
+    }
+
+    public function setNutrition(?Nutrition $nutrition): self
+    {
+        $this->nutrition = $nutrition;
+
+        return $this;
     }
 }

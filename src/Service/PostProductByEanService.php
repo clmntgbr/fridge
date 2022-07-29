@@ -100,9 +100,17 @@ class PostProductByEanService
         $product = new Product();
         $product
             ->setEan($data['code'])
-            ->setName($data['product']['product_name_fr'] ?? $data['product']['product_name'])
+            ->setName($data['product']['product_name'])
             ->setBrand($data['product']['brands'])
-            ->setData($data)
+            ->getNutrition()
+            ->setCountry($data['product']['countries'] ?? null)
+            ->setCategories($data['product']['categories'] ?? null)
+            ->setEcoscoreGrade($data['product']['ecoscore_grade'] ?? null)
+            ->setEcoscoreScore($data['product']['ecoscore_score'] ?? null)
+            ->setNutriscoreGrade($data['product']['nutriscore_grade'] ?? null)
+            ->setNutriscoreScore($data['product']['nutriscore_score'] ?? null)
+            ->setQuantity($data['product']['quantity'] ?? null)
+            ->setIngredientsText($data['product']['ingredients_text'] ?? null)
         ;
 
         $file = $this->getImage->get($data['product']['image_url'] ?? null);
