@@ -1,3 +1,6 @@
 App\Entity\Fridge:
-  fridge_{1..10}:
-    user: '@user_<current()>'
+  fridge_1:
+    user: '@user_1'
+
+#  fridge_{2..10}:
+#    user: '@user_<current()>'

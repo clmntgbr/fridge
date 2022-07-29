@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\ExpirationDateNotification;
 use App\Repository\FridgeRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Email;
@@ -16,7 +17,7 @@ class ExpirationDateNotificationService
     ) {
     }
 
-    public function send(array $items, string $key)
+    public function send(array $items, string $key, ExpirationDateNotification $expirationDateNotification)
     {
         $fridge = $this->fridgeRepository->findOneBy(['id' => $key]);
         if (null === $fridge) {
@@ -34,6 +35,7 @@ class ExpirationDateNotificationService
                     'fridge_id' => $fridge->getId(),
                     'subject' => $this->subject,
                     'items_count' => count($items),
+                    'days_before' => $expirationDateNotification->getDaysBefore(),
                     'data' => $items,
                     'hostname' => $this->hostname,
                 ])

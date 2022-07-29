@@ -41,7 +41,7 @@ class ExpirationDateNotificationCommand extends Command
                 if (count($items) === 0) {
                     continue;
                 }
-                $this->expirationDateNotificationService->send($items, $fridge->getId());
+                $this->expirationDateNotificationService->send($items, $fridge->getId(), $expirationDateNotification);
             }
         }
 

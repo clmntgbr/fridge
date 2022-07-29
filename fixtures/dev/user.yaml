@@ -6,9 +6,9 @@ App\Entity\User:
     roles: ['ROLE_ADMIN']
     is_enable: true
 
-  user_{2..10}:
-    id: '<current()>'
-    email: '<email()>'
-    plain_password: 'email<current()>'
-    roles: ['ROLE_USER']
-    is_enable: true
+#  user_{2..10}:
+#    id: '<current()>'
+#    email: '<email()>'
+#    plain_password: 'email<current()>'
+#    roles: ['ROLE_USER']
+#    is_enable: true

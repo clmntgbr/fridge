@@ -7,7 +7,6 @@ class OcrService
     const MAX_IMG_SIZE = 1024;
     const ENDPOINT_API = 'https://api.ocr.space/parse/imageurl?apikey=%s&url=%s&language=fre&isOverlayRequired=true';
     const REGEX = '/[0-9]?[0-9]?1[0-9]?[0-9]?1[0-9]?[0-9]?[0-9]?[0-9]?/';
-    const REGEX_TEST = '[0-9]$?';
 
     private $imageUrl = 'https://i.ibb.co/xJpX57V/IMG-5151-1.jpg';
     private array $response = [];

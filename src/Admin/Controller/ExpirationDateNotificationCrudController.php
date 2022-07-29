@@ -20,7 +20,7 @@ class ExpirationDateNotificationCrudController extends AbstractCrudController
         return [
             IdField::new('id')->setDisabled(),
             NumberField::new('daysBefore'),
-            AssociationField::new('user')->setDisabled(),
+            AssociationField::new('user'),
         ];
     }
 }

@@ -31,7 +31,7 @@ class Fridge
     private string $name;
 
     #[ORM\Column(type: Types::BOOLEAN)]
-    private string $isDefault;
+    private bool $isDefault;
 
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY', inversedBy: 'fridges'), ORM\JoinTable(name: 'user_id'), Groups(['fridge.read'])]
     private User $user;

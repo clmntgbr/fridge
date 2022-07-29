@@ -33,6 +33,16 @@ class ProductCrudController extends AbstractCrudController
             AssociationField::new('productStatus'),
             TextField::new('imagesDirectory'),
 
+            FormField::addPanel('Nutritions Details'),
+            TextField::new('nutrition.country')->hideOnIndex(),
+            TextField::new('nutrition.categories')->hideOnIndex(),
+            TextField::new('nutrition.ecoscore_grade')->hideOnIndex(),
+            TextField::new('nutrition.ecoscore_score')->hideOnIndex(),
+            TextField::new('nutrition.nutriscore_grade')->hideOnIndex(),
+            TextField::new('nutrition.nutriscore_score')->hideOnIndex(),
+            TextField::new('nutrition.quantity')->hideOnIndex(),
+            TextField::new('nutrition.ingredients_text')->hideOnIndex(),
+
             FormField::addPanel('Image'),
             TextField::new('imageFile', 'Upload')
                 ->setFormType(VichImageType::class)
