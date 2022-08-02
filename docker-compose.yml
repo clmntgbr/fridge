@@ -53,7 +53,18 @@ services:
     volumes:
       - database_volume_fridge:/var/lib/mysql
 
+  node:
+    image: node:16
+    volumes:
+      - application:/srv/app
+    working_dir: /srv/app
+    depends_on:
+      - php
+    networks:
+      - service
+
 volumes:
+  application: {}
   database_volume_fridge: {}
   certs: {}
 

@@ -13,3 +13,6 @@ authentication_token:
 admin:
     resource: ../src/Admin/
     type: annotation
+
+live_component:
+    resource: '@LiveComponentBundle/Resources/config/routing/live_component.xml'

@@ -249,6 +249,18 @@
     "sebastian/recursion-context": {
         "version": "4.0.4"
     },
+    "sensio/framework-extra-bundle": {
+        "version": "6.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.2",
+            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
+        },
+        "files": [
+            "config/packages/sensio_framework_extra.yaml"
+        ]
+    },
     "stella-maris/clock": {
         "version": "0.1.4"
     },
@@ -372,6 +384,18 @@
     },
     "symfony/intl": {
         "version": "v6.0.8"
+    },
+    "symfony/lock": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.2",
+            "ref": "a1c8800e40ae735206bb14586fdd6c4630a51b8d"
+        },
+        "files": [
+            "config/packages/lock.yaml"
+        ]
     },
     "symfony/mailer": {
         "version": "6.0",
@@ -532,6 +556,21 @@
     "symfony/uid": {
         "version": "v6.0.3"
     },
+    "symfony/ux-live-component": {
+        "version": "2.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.0",
+            "ref": "7e4ab27f9b1dd2b5f4aca3be765ab4f697dd3217"
+        },
+        "files": [
+            "config/routes/ux_live_component.yaml"
+        ]
+    },
+    "symfony/ux-twig-component": {
+        "version": "v2.3.0"
+    },
     "symfony/validator": {
         "version": "6.0",
         "recipe": {
@@ -564,6 +603,25 @@
         "files": [
             "config/packages/web_profiler.yaml",
             "config/routes/web_profiler.yaml"
+        ]
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.15",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.10",
+            "ref": "2e458cc7e6f1df1dad890eb104b81e4f302c9bd4"
+        },
+        "files": [
+            "assets/app.js",
+            "assets/bootstrap.js",
+            "assets/controllers.json",
+            "assets/controllers/hello_controller.js",
+            "assets/styles/app.css",
+            "config/packages/webpack_encore.yaml",
+            "package.json",
+            "webpack.config.js"
         ]
     },
     "symfony/yaml": {
