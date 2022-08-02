@@ -19,9 +19,9 @@ class PostProductByEanService
         private ProductRepository      $productRepository,
         private OpenFoodFactApiService $openFoodFactApiService,
         private EntityManagerInterface $em,
-        private GetImage $getImage,
-        private Filesystem $filesystem,
-        private OcrService $ocrService
+        private Security               $getImage,
+        private Filesystem             $filesystem,
+        private OcrService             $ocrService
     )
     {
     }

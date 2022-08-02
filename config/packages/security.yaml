@@ -41,6 +41,9 @@ security:
                 lifetime: 604800
                 path: /
                 always_remember_me: true
+            login_throttling:
+                max_attempts: 3
+                interval: '15 minutes'
 
     access_control:
         - { path: ^/login, roles: PUBLIC_ACCESS }
@@ -48,6 +51,8 @@ security:
         - { path: ^/api/docs, roles: PUBLIC_ACCESS }
         - { path: ^/api/authenticate, roles: PUBLIC_ACCESS }
         - { path: ^/api, roles: ROLE_USER }
+        - { path: ^/fridges, roles: ROLE_USER }
+        - { path: ^/fridge, roles: ROLE_USER }
 
 when@test:
     security:

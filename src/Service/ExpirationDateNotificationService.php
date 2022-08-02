@@ -6,12 +6,14 @@ use App\Entity\ExpirationDateNotification;
 use App\Repository\FridgeRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Routing\RouterInterface;
 
 class ExpirationDateNotificationService
 {
     public function __construct(
         private MailerService $mailerService,
         private FridgeRepository $fridgeRepository,
+        private RouterInterface $router,
         private string $hostname,
         private string $subject = 'Some of your products will be out of time soon !'
     ) {
