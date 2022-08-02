@@ -1,0 +1,10 @@
+{#<div class="card m-4">#}
+{#    <h5 class="card-title">{{ this.fridge.id }}</h5>#}
+{#    <p class="card-text">{{ this.fridge.name }}</p>#}
+
+{#    <p>count items : {{ this.getItemsCount }}</p>#}
+
+    {% for item in this.getItems %}
+        {{ component('item_card', {'fridge': this.fridge, 'item': item}) }}
+    {% endfor %}
+{#</div>#}
