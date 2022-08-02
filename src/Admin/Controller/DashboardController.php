@@ -40,6 +40,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToUrl('Api Docs', 'fas fa-map-marker-alt', '/api/docs');
+        yield MenuItem::linkToUrl('Fridges', 'fas fa-map-marker-alt', '/fridges');
         yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Fridge', 'fas fa-list', Fridge::class);
         yield MenuItem::linkToCrud('ExpirationDate', 'fas fa-list', ExpirationDateNotification::class);

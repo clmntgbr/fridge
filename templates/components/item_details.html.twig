@@ -1,0 +1,6 @@
+<div class="card m-4">
+    <p>{{ item.id }}</p>
+    <p>{{ item.product.name }}</p>
+    <p>{{ item.expirationDate|date('d/m/Y') }}</p>
+    <img src="{{ asset(item.product.imagesDirectory ~ item.product.image.name) }}" width="200px">
+</div>
